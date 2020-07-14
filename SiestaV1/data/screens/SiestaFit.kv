@@ -1,0 +1,75 @@
+#:kivy 1.1.0
+
+ShowcaseScreen:
+	name: 'SiestaFit'
+    fullscreen: True
+	
+    text_input: text_input
+    text_input_1: text_input_1
+	
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: 'Load'
+                on_release: root.show_load_Fit()
+            Button:
+                text: 'Save'
+                on_release: root.show_save_Fit()
+
+        BoxLayout:
+            TextInput:
+                id: text_input
+                text: ''
+
+            TextInput:
+                id: text_input_1
+                text: ''
+
+<LoadDialogFit>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load_fit(filechooser.path, filechooser.selection)
+
+<SaveDialogFit>:
+    text_input_1: text_input_1
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            on_selection: text_input_1.text = self.selection and self.selection[0] or ''
+
+        TextInput:
+            id: text_input_1
+            size_hint_y: None
+            height: 30
+            multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Save"
+                on_release: root.save_fit(filechooser.path, text_input_1.text)

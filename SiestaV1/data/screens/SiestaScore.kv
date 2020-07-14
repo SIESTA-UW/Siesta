@@ -1,0 +1,121 @@
+#:kivy 1.1.0
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
+ShowcaseScreen:
+	name: 'SiestaScore'
+    fullscreen: True
+	
+    text_input: text_input
+	graph_test : graph_test
+	text_input_1: text_input_1
+	
+	
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: 'Load Database'
+                on_release: root.show_load_Score()
+			Button:
+                text: 'Load Mice'
+                on_release: root.show_load1_Score()
+            Button:
+                text: 'Save'
+                on_release: root.show_save_Score()
+
+        BoxLayout:
+		
+            TextInput:
+                id: text_input
+                text: ''
+				
+                 
+            Graph:
+				id: graph_test
+				plot: MeshLinePlot
+				xlabel:'X'
+				ylabel:'Y'
+				x_ticks_minor:5
+				x_tics_major:25
+				y_ticks_major:1
+				padding:5
+				x_grid:True
+				y_grid:True
+				xmin:-0
+				xmax:500
+				ymin:-5
+				ymax:5
+				pos: 0, root.height / 6
+				size: root.width * 2 / 3 , root.height * 18 / 24
+
+            TextInput:
+                id: text_input_1
+                text: ''
+
+<LoadDialogScore>:
+
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load_Score(filechooser.path, filechooser.selection)
+
+<LoadDialog1Score>:
+
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load1_Score(filechooser.path, filechooser.selection)
+
+<SaveDialogScore>:
+    text_input_1: text_input_1
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            on_selection: text_input.text_1 = self.selection and self.selection[0] or ''
+        TextInput:
+            id: text_input_1
+            size_hint_y: None
+            height: 30
+            multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Save"
+                on_release: root.save_Score(filechooser.path, text_input_1.text)

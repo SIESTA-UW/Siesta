@@ -1,0 +1,89 @@
+ShowcaseScreen:
+    name: 'SiestaConfig'
+	fullscreen: True
+	
+    freq: freq
+    eegc: eegc
+    emgc: emgc
+	epocha: epocha
+
+    FloatLayout:
+        cols:1
+
+        FloatLayout:
+            size: root.width, root.height/2
+
+            Label:
+                text: "Settings"
+                size_hint: 0.8, 0.2
+                pos_hint: {"x":0.1, "top":1}
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8}
+                text: "Sampling Freq.: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8}
+                size_hint: 0.4, 0.12
+                id: freq
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+				text: '400'
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13}
+                text: "EEG Channel: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13}
+                size_hint: 0.4, 0.12
+                id: eegc
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+				text: '3'
+            Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*2}
+                text: "EMG Channel: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*2}
+                size_hint: 0.4, 0.12
+                id: emgc
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+				text: '1'
+			Label:
+                size_hint: 0.5,0.12
+                pos_hint: {"x":0, "top":0.8-0.13*3}
+                text: "Epoch: "
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+            TextInput:
+                pos_hint: {"x":0.5, "top":0.8-0.13*3}
+                size_hint: 0.4, 0.12
+                id: epocha
+                multiline: False
+                font_size: (root.width**2 + root.height**2) / 14**4
+				text: '10'
+				
+			Label:
+                text: "Warning: Data from 0.5 Hz to 50 Hz is used. Filter accordingly."
+                size_hint: 0.5, 0.12
+                pos_hint: {"x":0.3, "top":0.1}
+				color: 1,0,0,1
+                font_size: (root.width**2 + root.height**2) / 14**4
+
+
+        Button:
+            pos_hint:{"x":0.2,"y":0.05}
+            size_hint: 0.6, 0.17
+            text: "Submit"
+            font_size: (root.width**2 + root.height**2) / 14**4
+            on_release:
+                root.submit()
